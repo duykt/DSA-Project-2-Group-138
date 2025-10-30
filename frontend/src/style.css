@@ -1,0 +1,49 @@
+@font-face {
+    font-family: "Inter";
+    src: url("../public/Inter_18pt-Light.ttf");
+}
+
+body {
+    background-color: #272729;
+    color: white;
+    font-family: "Inter";
+}
+
+.app {
+    display: flex;
+    height: 100vh;
+}
+
+.header {}
+
+/* sidebar / filterbar */
+
+.sidebar {
+    width: 250px;
+    background-color: #272729;
+}
+
+.checkbox-label {
+    display: block;
+}
+
+/* movie cards */
+.main-content {
+    flex: 1;
+    display: grid;
+    gap: 1rem;
+    padding: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    background-color: #0E0E0F;
+}
+
+
+.movie-card {
+    height: 500px;
+    /* border: 3px solid #A40000; */
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+

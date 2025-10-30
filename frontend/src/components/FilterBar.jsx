@@ -19,9 +19,9 @@ export default function FilterBar({filters, setFilters}) {
 
     return (
         <div className="filterBar">
-            <h2>Filterbar</h2>
+            <h2>Filter</h2>
             <div className="select-genre">
-                <h2>Genres</h2>
+                <h3>Genres</h3>
                 {genres.map((genre)=> (
                     <label key={genre} className="checkbox-label">
                         <input
@@ -35,7 +35,7 @@ export default function FilterBar({filters, setFilters}) {
             </div>
             
             <div className="select-year">
-                <h2>Year</h2>
+                <h3>Year</h3>
                 {years.map((year)=> (
                     <label key={year} className="checkbox-label">
                         <input
@@ -49,7 +49,7 @@ export default function FilterBar({filters, setFilters}) {
             </div>
 
             <div className="select-rating">
-                <h2>Rating</h2>
+                <h3>Rating</h3>
                 {ratings.map((rating)=> (
                     <label key={rating} className="checkbox-label">
                         <input
