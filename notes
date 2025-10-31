@@ -1,11 +1,12 @@
 dataset: https://www.kaggle.com/datasets/asaniczka/tmdb-movies-dataset-2023-930k-movies
 
 when downloading the dataset, include these things in your data:
- - movie id (int)
+ - imdb_id (str)
  - title (str)
  - vote_average (int)
  - vote_count (int)
  - release_date (str)
+ - runtime (int)
  - poster_path (str)
  - genres (list of str)
 
@@ -13,7 +14,7 @@ When we sort the data, it should be an array of dictionaries, with each dictiona
 
 movie_arr = [
     {
-        id: "1",
+        id: "tt1375666",
         title: "Inception",
         vote_average: 8.364,
         vote_count: 34495,
@@ -24,7 +25,7 @@ movie_arr = [
     },
     
     {
-        id: "2",
+        id: "tt0816692",
         title: "Interstellar",
         vote_average: 8.417,
         vote_count: 32571,
