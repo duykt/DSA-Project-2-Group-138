@@ -1,0 +1,22 @@
+﻿# ===== FRONTEND =====
+frontend/node_modules/
+frontend/.env
+frontend/build/
+frontend/dist/
+
+# ===== BACKEND =====
+backend/.venv/
+backend/__pycache__/
+backend/*.pyc
+backend/tmdb_movies.csv
+
+# ===== SYSTEM / EDITOR =====
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ===== MISC =====
+*.log
+*.tmp
+__pycache__/
