@@ -12,6 +12,13 @@ def load_movies_from_csv(file_path):
     reader = csv.DictReader(f)
     for row in reader:
         try:
+            if (row["adult"] == "True"):
+                continue
+            if row["vote_count"] == "":
+                continue
+            if (int(row["vote_count"]) < 5):
+                continue
+
             movie = {}
             if "id" in row and row["id"] != "":
                 movie["id"] = int(row["id"])
@@ -43,12 +50,12 @@ def load_movies_from_csv(file_path):
             else:
                 movie["runtime"] = 0.0
 
-            if "backdrop_path" in row and row["backdrop_path"] != "":
-                movie["backdrop_path"] = row["backdrop_path"]
+            if "poster_path" in row and row["poster_path"] != "":
+                movie["poster_path"] = row["poster_path"]
             elif "poster_path" in row:
-                movie["backdrop_path"] = row["poster_path"]
+                movie["poster_path"] = row["poster_path"]
             else:
-                movie["backdrop_path"] = ""
+                movie["poster_path"] = ""
 
             if "original_language" in row:
                 movie["original_language"] = row["original_language"]

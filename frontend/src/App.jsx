@@ -1,5 +1,6 @@
 import './style.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from "axios";
 import Header from "./components/Header";
 import FilterBar from './components/FilterBar';
 import MovieCard from './components/MovieCard';
@@ -16,6 +17,15 @@ export default function App() {
     { id: 3, title: "Interstellar", rating: 8.6, genres: ["Adventure", "Drama"], year: 2014, runtime: 169, image: "https://image.tmdb.org/t/p/original//gEU2QniE6E77NI6lCU6MxlNBvIx.jpg"},
     { id: 4, title: "Inside Out", rating: 8.1, genres: ["Animation", "Comedy"], year: 2015, runtime: 95, image: "https://image.tmdb.org/t/p/original//2H1TmgdfNtsKlU9jKdeNyYL5y8T.jpg"},
   ];
+
+  const fetchAPI = async () => {
+    const response = await axios.get("http://127.0.0.1:8080/movies");
+    console.log(response[0])
+  }
+
+  useEffect(() => {
+    fetchAPI()
+  }, []) 
 
   const [filters, setFilters] = useState({
     genres: [],

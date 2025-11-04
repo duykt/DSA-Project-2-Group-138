@@ -27,7 +27,7 @@ def get_movies():
     min_runtime = request.args.get("min_runtime",None,type=float)
     max_runtime = request.args.get("max_runtime",None,type=float)
     year_filter = request.args.get("year",None)
-    limit = request.args.get("limit",100,type=int)
+    limit = request.args.get("limit",9999999999,type=int)
 
     if key not in movies[0]:
         return jsonify({"error":"Invalid sort key"}),400
@@ -81,4 +81,4 @@ def get_movies():
 
 if __name__=="__main__":
     print("Flask backend starting up...")
-    app.run(debug=True)
+    app.run(debug=True, port=8080)
