@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3000",
+  "proxy": "http://127.0.0.1:5000",
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
@@ -14,11 +14,17 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start-frontend": "react-scripts start",
+    "start-backend": "cd ../backend && ..\\backend\\.venv\\Scripts\\python.exe app.py",
+    "start-all": "concurrently \"npm run start-frontend\" \"npm run start-backend\""
   },
   "eslintConfig": {
     "extends": [
