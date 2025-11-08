@@ -11,16 +11,18 @@ import MovieCard from './components/MovieCard';
 
 export default function App() {
   // temp movie data
-  const movies = [
-    { id: 1, title: "Inception", rating: 8.8, genres: ["Action", "Sci-Fi"], year: 2010, runtime: 148, image: "https://image.tmdb.org/t/p/original/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg"},
-    { id: 2, title: "The Dark Knight", rating: 9.0, genres: ["Action", "Drama"], year: 2008, runtime: 152, image: "https://image.tmdb.org/t/p/original//qJ2tW6WMUDux911r6m7haRef0WH.jpg"},
-    { id: 3, title: "Interstellar", rating: 8.6, genres: ["Adventure", "Drama"], year: 2014, runtime: 169, image: "https://image.tmdb.org/t/p/original//gEU2QniE6E77NI6lCU6MxlNBvIx.jpg"},
-    { id: 4, title: "Inside Out", rating: 8.1, genres: ["Animation", "Comedy"], year: 2015, runtime: 95, image: "https://image.tmdb.org/t/p/original//2H1TmgdfNtsKlU9jKdeNyYL5y8T.jpg"},
-  ];
+  const [movies, setMovies] = useState([]);
 
   const fetchAPI = async () => {
-    const response = await axios.get("http://127.0.0.1:8080/movies");
-    console.log(response[0])
+    try {
+      const response = await axios.get("http://127.0.0.1:8080/movies");
+      setMovies(response.data)
+      console.log("Movies fetched: ", response.data);
+      console.log("First movie:", response.data[0]);
+    } catch (error) {
+      console.log("Error fetching movies: ", error);
+    }
+    
   }
 
   useEffect(() => {
@@ -32,21 +34,30 @@ export default function App() {
     years: [],
     ratings: [],
     runtimes: [],
+    languages: [],
+    voteCounts: [],
   });
 
-  console.log(filters);
   const filteredMovies = movies.filter((movie) => {
+    const movieGenres = movie.genre
+      ? movie.genre.split(",").map((g) => g.trim())
+      : [];
+
     const matchGenre =
       filters.genres.length === 0 ||
-      movie.genres.some((genre) => filters.genres.includes(genre));
+      movieGenres.some((genre) => filters.genres.includes(genre));
 
     const matchYear =
       filters.years.length === 0 ||
-      filters.years.includes(movie.year.toString());
+      filters.years.some((decade) => {
+      const [start, end] = decade.split("–").map(Number);
+      const year = new Date(movie.release_date).getFullYear();
+      return year >= start && year <= end;
+    });
 
     const matchRating =
       filters.ratings.length === 0 ||
-      filters.ratings.some((rating) => movie.rating >= parseFloat(rating));
+      filters.ratings.some((rating) => movie.vote_average  >= parseFloat(rating));
 
     const matchRuntime =
       filters.runtimes.length === 0 ||
@@ -61,7 +72,23 @@ export default function App() {
         if (range === ">180") return runtime >= 180;
         return true;
     });
-    return matchGenre && matchRating && matchYear && matchRuntime;
+
+    const matchLanguage =
+      filters.languages.length === 0 ||
+      filters.languages.includes(movie.original_language)
+
+    const matchVoteCount =
+      filters.voteCounts.length === 0 ||
+      filters.voteCounts.some((range) => {
+        const votes = movie.vote_count;
+        if (range === "100-500") return votes >= 100 && votes < 500;
+        if (range === "500-1000") return votes >= 500 && votes < 1000;
+        if (range === "1000-5000") return votes >= 1000 && votes < 5000;
+        if (range === ">5000") return votes >= 5000;
+        return true;
+      });
+      
+    return matchGenre && matchRating && matchYear && matchRuntime && matchVoteCount && matchLanguage;
   })
 
   return (
@@ -73,6 +100,7 @@ export default function App() {
           <FilterBar
             filters={filters} 
             setFilters={setFilters}
+            movies={movies}
           />
         </div>
         {/* main content */}

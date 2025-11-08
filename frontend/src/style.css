@@ -4,7 +4,7 @@
 }
 
 body {
-    background-color: #272729;
+    background-color: #1b1b1d;
     color: white;
     font-family: "Inter";
 }
@@ -22,7 +22,7 @@ body {
 
 .sidebar {
     width: 250px;
-    background-color: #272729;
+    /* background-color: #272729; */
     padding-left: 10px;
 }
 
@@ -49,12 +49,14 @@ body {
     gap: 1rem;
     padding: 1.5rem;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    background-color: #0E0E0F;
+    min-height: 100vh;
+    align-self: stretch;
 }
 
 .movie-card {
     height: 600px;
     /* border: 3px solid #A40000; */
+    background-color: #0E0E0F;
     background-size: cover;
     background-position: center;
     overflow: hidden;
@@ -72,11 +74,26 @@ body {
 .movie-info {
     padding-left: 5px;
     margin: 0.1rem 0;
-    line-height: 0.5;
+    line-height: 0.7;
+    word-wrap: break-word;
+    overflow: hidden
 }
 
 .movie-title {
-    margin-top: 0.8rem;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    font-weight: 600;
+    word-break: break-word;
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: ellipsis;
+    max-height: 3em;
+}
+
+.movie-genre,
+.movie-year,
+.movie-runtime {
+  font-size: clamp(0.8rem, 0.9vw, 1rem);
 }
 
 

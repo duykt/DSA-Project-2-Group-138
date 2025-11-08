@@ -16,7 +16,7 @@ def load_movies_from_csv(file_path):
                 continue
             if row["vote_count"] == "":
                 continue
-            if (int(row["vote_count"]) < 5):
+            if (int(row["vote_count"]) < 100):
                 continue
 
             movie = {}
@@ -68,6 +68,11 @@ def load_movies_from_csv(file_path):
                 movie["genre"] = row["genre"]
             else:
                 movie["genre"] = ""
+
+            if "imdb_id" in row:
+                movie["imdb_id"] = row["imdb_id"]
+            else:
+                movie["imdb_id"] = ""
 
             movies.append(movie)
         except Exception as e:
